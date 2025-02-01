@@ -3,7 +3,7 @@ from web3 import Web3
 
 def connect_to_blockchain():
     try:
-        w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
+        w3 = Web3(Web3.HTTPProvider('buraya adresi yaziniz'))
         if w3.isConnected():
             print("Blockchain ağına başarıyla bağlanıldı!")
             return w3
