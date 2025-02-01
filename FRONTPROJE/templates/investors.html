@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yatırımcı Yönetimi</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Yatırımcı Yönetimi</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/users">Kullanıcılar</a></li>
+                <li><a href="/borrowers">Borçlular</a></li>
+                <li><a href="/investors">Yatırımcılar</a></li>
+                <li><a href="/blockchain">Blockchain Bağlantısı</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Yatırımcı Ekleme Formu -->
+        <form method="POST" action="/investors">
+            <h2>Yatırımcı Ekle</h2>
+            <label>Kullanıcı ID: <input type="text" name="user_id" required></label>
+            <label>Yatırım Bütçesi: <input type="number" name="investment_budget" required></label>
+            <button type="submit">Ekle</button>
+        </form>
+
+        <!-- Mevcut Yatırımcılar -->
+        <h2>Mevcut Yatırımcılar</h2>
+        <ul>
+            {% for investor in investors %}
+                <li>
+                    ID: {{ investor.id }}, Kullanıcı ID: {{ investor.user_id }}, Bütçe: {{ investor.investment_budget }}
+                    <a href="/investors/delete/{{ investor.id }}">Sil</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Yatırımcı Güncelle</h2>
+        <form method="POST" action="/investors/update">
+         <label>Yatırımcı ID:</label>
+         <input type="text" name="investor_id" required>
+         <label>Yeni Bütçe:</label>
+         <input type="number" name="investment_budget" required>
+         <button type="submit">Güncelle</button>
+        </form>
+
+
+    </main>
+    <footer>
+        <p>&copy; 2025 PeerFund. Tüm Hakları Saklıdır.</p>
+    </footer>
+</body>
+</html>

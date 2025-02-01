@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borçlu Yönetimi</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Borçlu Yönetimi</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/users">Kullanıcılar</a></li>
+                <li><a href="/borrowers">Borçlular</a></li>
+                <li><a href="/investors">Yatırımcılar</a></li>
+                <li><a href="/blockchain">Blockchain Bağlantısı</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Borçlu Ekleme Formu -->
+        <section>
+            <h2>Borçlu Ekle</h2>
+            <form method="POST" action="/borrowers">
+                <label>Kullanıcı Adı:</label>
+                <select name="user_id" required>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.name }}</option>
+                    {% endfor %}
+                </select>
+                <label>Kredi Skoru:</label>
+                <input type="number" name="credit_score" required>
+                <label>Risk Seviyesi:</label>
+                <input type="text" name="risk_level" required>
+                <button type="submit">Ekle</button>
+            </form>
+        </section>
+
+        <!-- Mevcut Borçlular -->
+        <section>
+            <h2>Mevcut Borçlular</h2>
+            <ul>
+                {% for borrower in borrowers %}
+                    <li>
+                        ID: {{ borrower.id }}, 
+                        Kullanıcı Adı: {{ borrower.user_name }}, 
+                        Kredi Skoru: {{ borrower.credit_score }}, 
+                        Risk Seviyesi: {{ borrower.risk_level }}
+                        <a href="/borrowers/delete/{{ borrower.id }}">Sil</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Borçlu Güncelleme -->
+        <section>
+            <h2>Borçlu Güncelle</h2>
+            <form method="POST" action="/borrowers/update">
+                <label>Borçlu ID:</label>
+                <select name="borrower_id" required>
+                    {% for borrower in borrowers %}
+                        <option value="{{ borrower.id }}">{{ borrower.user_name }}</option>
+                    {% endfor %}
+                </select>
+                <label>Yeni Kredi Skoru:</label>
+                <input type="number" name="credit_score" required>
+                <label>Yeni Risk Seviyesi:</label>
+                <input type="text" name="risk_level" required>
+                <button type="submit">Güncelle</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 PeerFund. Tüm Hakları Saklıdır.</p>
+    </footer>
+</body>
+</html>

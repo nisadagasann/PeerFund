@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Yönetimi</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Kullanıcı Yönetimi</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Kullanıcı Listesi</h2>
+            <ul>
+                {% for user in users %}
+                    <li>{{ user.name }} ({{ user.email }})
+                        <a href="/users/delete/{{ user.id }}">Sil</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <h2>Kullanıcı Ekle</h2>
+            <form method="POST" action="/users">
+                <label>İsim: <input type="text" name="name" required></label>
+                <label>Email: <input type="email" name="email" required></label>
+                <label>Şifre: <input type="password" name="password" required></label>
+                <label>Kullanıcı Türü: 
+                    <select name="user_type">
+                        <option value="1">Admin</option>
+                        <option value="2">Borrower</option>
+                        <option value="3">Investor</option>
+                    </select>
+                </label>
+                <button type="submit">Ekle</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 PeerFund. Tüm Hakları Saklıdır.</p>
+    </footer>
+</body>
+</html>
