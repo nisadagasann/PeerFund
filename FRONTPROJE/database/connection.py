@@ -4,7 +4,7 @@ def get_connection():
     try:
         connection = pyodbc.connect(
             r"Driver={ODBC Driver 18 for SQL Server};"
-            r"Server=LAPTOP-8CIIC8KV\SQLEXPRESS;"  # Sunucu adınız
+            r"Server=;"  # Sunucu adınız
             "Database=NewPeerFund;"  # Veritabanı adınız
             "Trusted_Connection=yes;"  # Windows Authentication
             "TrustServerCertificate=yes;"  # Sertifika doğrulama hatasını geç
